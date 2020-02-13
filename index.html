@@ -4,33 +4,42 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <link rel="stylesheet" href="./style.css" />
-    <title>Auth Form</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="./assets/css/style.css.css" />
+    <title>Code Quiz</title>
   </head>
   <body>
-    <div class="clearfix">
+    <!-- <div class="clearfix">
       <div class="card">
-        <h2>Sign Up</h2>
-        <form method="POST">
-          <div class="input-group">
-            <label for="email">Email</label>
-            <input type="text" name="email" id="email" placeholder="janedoe@mail.com" />
-          </div>
-          <div class="input-group">
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password" placeholder="supersecure123" />
-          </div>
           <div id="msg"></div>
-          <button id="sign-up">Sign Up</button>
+          <h3>You will be taking a coding quiz. Answer the questions as fast as possible. Once you finish your time will be recorded. If you get a question wrong, time will be deducted. </h3>
+          <button id="startQuiz">Begin Quiz</button>
         </form>
-      </div>
+      </div> -->
 
-      <div class="card">
-        <h2>Last Registered User:</h2>
-        <p><strong>Email:</strong> <span id="user-email"></span></p>
+      <!-- Use this later for logging the highest score -->
+      <!-- <div class="card">
+        <h2>Highest Score:</h2>
+        <p><strong>Name:</strong> <span id="name"></span></p>
         <p><strong>Password:</strong> <span id="user-password"></span></p>
       </div>
+    </div> -->
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-2"><a href="http://">View Highscore</a></div>
+        <div class="col-sm-8"></div>
+        <div class="col-sm-2" id="timer">Time: 0</div>
+      </div>
+      <div class="row">
+        <div class="col-sm-3"></div>
+        <div class="col-sm-6" id="main">
+          <h1>Coding Quiz Challenge</h1>
+          <div>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quam necessitatibus fugiat nemo tempore veritatis rerum assumenda recusandae optio quaerat quidem, velit perferendis! Deleniti natus rerum maxime illo cupiditate modi placeat.</div>
+          <button id="startQuiz">Start Quiz</button>
+        </div>
+      </div>
     </div>
-    <script src="./script.js"></script>
+    <script src="./assets/js/script.js"></script>
   </body>
 </html>
