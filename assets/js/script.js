@@ -44,10 +44,34 @@ var questions = [
 ];
 var timer = 15 * questions.length
 
+//my code starts here
+var highScore = document.getElementById("high score")
+
+function renderLastRegistered() {
+  var initials = localStorage.getItem("#submit");
+  var score = localStorage.getItem("timerDom");
+  Submit.textContent = initials;
+  timerDom.value = score;
+  document.appendChild("Highest Scores", timerDom);
+}
+
+
+function score() {
+  var Submit = document.createElement("#submit").textContent;
+  localStorage.setItem("timerDom", highScore);
+  
+
+}
+
+//my code ends here
 var timerDom = document.getElementById("timer")
 var timerInterval
 function endGame() {
   clearInterval(timerInterval)
+  //added code below
+  var a = document.getElementById("#highScore")   //get the high score
+  a.href = "highscore.html"   //go to the high score page
+  //
   console.log("game over")
 }
 function TimerCountdown() {
