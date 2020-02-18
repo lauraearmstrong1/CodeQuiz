@@ -44,36 +44,32 @@ var questions = [
 ];
 var timer = 15 * questions.length
 
-//my code starts here
-var highScore = document.getElementById("high score")
+//Need help with the high score
+var highestScores = document.getElementById("highScore")
 
 function renderLastRegistered() {
-  var initials = localStorage.getItem("#submit");
-  var score = localStorage.getItem("timerDom");
+  var initials = localStorage.getItem("initials");
+  var times = localStorage.getItem("timerDom");
+  var score = localStorage.getItem("current-score")
   Submit.textContent = initials;
-  timerDom.value = score;
+  timerDom.value = times;
   document.appendChild("Highest Scores", timerDom);
 }
 
-
 function score() {
-  var Submit = document.createElement("#submit").textContent;
-  localStorage.setItem("timerDom", highScore);
-  
-
+  localStorage.setItem("timerDom", highestScores);
+  localStorage.setItem("initials", initials);
+  localStorage.setItem("current-score", timer)
 }
-
-//my code ends here
-var timerDom = document.getElementById("timer")
-var timerInterval
+//
+var timerDom = document.getElementById("timer");
+var timerInterval;
 function endGame() {
   clearInterval(timerInterval)
-  //added code below
-  var a = document.getElementById("#highScore")   //get the high score
-  a.href = "highscore.html"   //go to the high score page
-  //
-  console.log("game over")
+  window.location.href="highscore.html"
 }
+  console.log("game over")
+
 function TimerCountdown() {
     timer--
     timerDom.textContent = "Time: "+ timer
@@ -90,7 +86,6 @@ function checker(number) {
   if(questionNumber === questions.length){
     endGame()
   }else{
-
     writeQuestion()
   }
 }
