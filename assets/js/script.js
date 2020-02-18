@@ -42,61 +42,77 @@ var questions = [
     answer: "console.log"
   }
 ];
-var timer = 15 * questions.length
-
-//Need help with the high score
-var highestScores = document.getElementById("highScore")
-
-function renderLastRegistered() {
-  var initials = localStorage.getItem("initials");
-  var times = localStorage.getItem("timerDom");
-  var score = localStorage.getItem("current-score")
-  Submit.textContent = initials;
-  timerDom.value = times;
-  document.appendChild("Highest Scores", timerDom);
-}
-
-function score() {
-  localStorage.setItem("timerDom", highestScores);
-  localStorage.setItem("initials", initials);
-  localStorage.setItem("current-score", timer)
-}
-//
+var timer = 15 * questions.length  //timer set to 15 seconds per question, but given in total on the window
 var timerDom = document.getElementById("timer");
 var timerInterval;
-function endGame() {
-  clearInterval(timerInterval)
-  window.location.href="highscore.html"
-}
-  console.log("game over")
 
+//Need help with the high score
+// var highestScores = document.getElementById("highScore")
+
+var initials = localStorage.getItem("initials");
+var times = localStorage.getItem("timerDom");
+
+function renderLastRegistered() {
+  initials.textContent = "High Score: " + initials;
+  times.value = timerDom;
+  document.appendChild("initials", initials);
+  document.appendChild("times", timerDom);
+}
+
+//function that saves the score to the local storage
+function score() {
+  localStorage.setItem("times", times);
+  localStorage.setItem("initials", initials);
+  renderLastRegistered(); //calling the last score function
+}
+
+//function of what happens at the end of the game
+function endGame() {
+  clearInterval(timerInterval) //interval stops
+  window.location.href="highscore.html" //go to highscores page
+  score(); //calling function score to save to local storage
+}
+
+//function that keeps track of the time
 function TimerCountdown() {
-    timer--
-    timerDom.textContent = "Time: "+ timer
+    timer-- //timer decreases by one 
+    timerDom.textContent = "Time: "+ timer  //time displayed on the page
     if(timer === 0){
       endGame()
     }
 }
+
+//function that checks which number question the user is on
 function checker(number) {
-  console.log(number)
+  //if the answer is wrong, deduct 10 seconds
   if(questions[questionNumber].choices[number] !== questions[questionNumber].answer){
     timer -= 10
   }
+  //go to the next question
   questionNumber++
+  //if the question is at the end (last question), then go to the function to end the game
   if(questionNumber === questions.length){
     endGame()
   }else{
+    //if it's not the last question, then it asks the next question
     writeQuestion()
   }
 }
+
+//function that displays the questions
 function writeQuestion (){
+  //var main defined at the top of page
   main.innerHTML = ""
   var title = document.createElement("h2")
+  //title --> questions array starting at zero
   title.textContent = questions[questionNumber].title
+  //appending the title to the body
   main.appendChild(title)
   var ul = document.createElement("ul")
+  //list of questions added to the body
   ul.classList.add("list-unstyled")
   for (var i = 0; i < questions[questionNumber].choices.length; i++) {
+    //list the choices that are in the "choices" array for each questions
     var li = document.createElement("li")
     var button = document.createElement("button")
     button.textContent = (i+1)+": "+ questions[questionNumber].choices[i]
@@ -104,10 +120,14 @@ function writeQuestion (){
     li.appendChild(button)
     ul.appendChild(li)
   }
-  console.log(ul)
+  //appending the ul list to the title
   main.appendChild(ul)
 }
+
+//start the quiz by clicking the button
 startQuiz.addEventListener("click", function() {
+  //interval counts down by one second
   timerInterval = setInterval(TimerCountdown, 1000);
+  //call on the function writeQuestion to display the questions
   writeQuestion()
 })
