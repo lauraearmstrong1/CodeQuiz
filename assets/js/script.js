@@ -46,31 +46,38 @@ var timer = 15 * questions.length  //timer set to 15 seconds per question, but g
 var timerDom = document.getElementById("timer");
 var timerInterval;
 
-//Need help with the high score
-// var highestScores = document.getElementById("highScore")
 
-var initials = localStorage.getItem("initials");
-var times = localStorage.getItem("timerDom");
+//CODE BELOW MESSES UP THE QUIZ
 
-function renderLastRegistered() {
+//function that saves the name to the local storage
+var submit = document.getElementById("#submit");
+var initials = document.getElementById("#initials");
+submit.addEventListener("click", function(event) {
+  event.preventDefault();
   initials.textContent = "High Score: " + initials;
-  times.value = timerDom;
-  document.appendChild("initials", initials);
-  document.appendChild("times", timerDom);
-}
-
-//function that saves the score to the local storage
-function score() {
-  localStorage.setItem("times", times);
   localStorage.setItem("initials", initials);
   renderLastRegistered(); //calling the last score function
+
+});
+
+function renderLastRegistered() {
+  var times = localStorage.getItem("timerDom");
+  times.value = timerDom;
+  localStorage.getItem("Score", timer);
+  localStorage.getItem("initials", initials);
+  document.body.appendChild("times", timerDom);
+  document.body.appendChild("initials", initials);
 }
+
+//WORKS WITHOUT ABOVE CODE
+
 
 //function of what happens at the end of the game
 function endGame() {
-  clearInterval(timerInterval) //interval stops
+  clearInterval(timerInterval); //interval stops
+  localStorage.setItem("score", timer); //save the time from the timer to the local storage
   window.location.href="highscore.html" //go to highscores page
-  score(); //calling function score to save to local storage
+  //saveName(); //calling function score to save initials
 }
 
 //function that keeps track of the time
@@ -81,6 +88,7 @@ function TimerCountdown() {
       endGame()
     }
 }
+
 
 //function that checks which number question the user is on
 function checker(number) {
