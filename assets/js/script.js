@@ -31,13 +31,13 @@ var questions = [
   },
   {
     title:
-    "String values must be enclosed within ____ when being assigned to variables.",
+      "String values must be enclosed within ____ when being assigned to variables.",
     choices: ["commas", "curly brackets", "quotes", "parentheses"],
     answer: "quotes"
   },
   {
     title:
-    "A very useful tool used during development and debugging for printing content to the debugger is:",
+      "A very useful tool used during development and debugging for printing content to the debugger is:",
     choices: ["JavaScript", "terminal / bash", "for loops", "console.log"],
     answer: "console.log"
   }
@@ -49,66 +49,82 @@ var timerInterval;
 
 //CODE BELOW MESSES UP THE QUIZ
 
-//function that saves the name to the local storage
-var submit = document.getElementById("#submit");
-var initials = document.getElementById("#initials");
-submit.addEventListener("click", function(event) {
-  event.preventDefault();
-  initials.textContent = "High Score: " + initials;
-  localStorage.setItem("initials", initials);
-  renderLastRegistered(); //calling the last score function
-
-});
-
 function renderLastRegistered() {
   var times = localStorage.getItem("timerDom");
   times.value = timerDom;
   localStorage.getItem("Score", timer);
-  localStorage.getItem("initials", initials);
+  
   document.body.appendChild("times", timerDom);
   document.body.appendChild("initials", initials);
 }
 
-//WORKS WITHOUT ABOVE CODE
+//function that saves the name to the local storage
 
+
+//WORKS WITHOUT ABOVE CODE
+function submit(){
+
+  var initials = document.getElementById("initials").value
+
+    event.preventDefault();
+    var local = localStorage.getItem("initials");
+    local=  JSON.parse(local)
+    if(!local){
+      local = []
+    }
+    local.push({initials: initials, score: timer})
+    localStorage.setItem("initials", JSON.stringify( local))
+     window.location.href="highscore.html" //go to highscores page
+    // initials.textContent = "High Score: " + initials;
+    // localStorage.setItem("initials", initials);
+    // renderLastRegistered(); //calling the last score function
+
+
+}
+function getIntials() {
+
+  var intialsPage = '<h2>Highest Scores:</h2> <div class="form-group"><label for="exampleFormControlTextarea1" >Enter Initials:</label><textarea class="form-control" id="initials" rows="1"></textarea><button id="submit" onClick ="submit()">Submit</button></div>'
+
+  main.innerHTML = intialsPage
+}
 
 //function of what happens at the end of the game
 function endGame() {
   clearInterval(timerInterval); //interval stops
-  localStorage.setItem("score", timer); //save the time from the timer to the local storage
-  window.location.href="highscore.html" //go to highscores page
-  //saveName(); //calling function score to save initials
+
+  getIntials()
+  
 }
 
 //function that keeps track of the time
 function TimerCountdown() {
-    timer-- //timer decreases by one 
-    timerDom.textContent = "Time: "+ timer  //time displayed on the page
-    if(timer === 0){
-      endGame()
-    }
+  timer-- //timer decreases by one 
+  timerDom.textContent = "Time: " + timer  //time displayed on the page
+  if (timer === 0) {
+    endGame()
+  }
 }
 
 
 //function that checks which number question the user is on
 function checker(number) {
   //if the answer is wrong, deduct 10 seconds
-  if(questions[questionNumber].choices[number] !== questions[questionNumber].answer){
+  if (questions[questionNumber].choices[number] !== questions[questionNumber].answer) {
     timer -= 10
   }
   //go to the next question
   questionNumber++
   //if the question is at the end (last question), then go to the function to end the game
-  if(questionNumber === questions.length){
+  if (questionNumber === questions.length) {
     endGame()
-  }else{
+  } else {
     //if it's not the last question, then it asks the next question
     writeQuestion()
   }
 }
 
 //function that displays the questions
-function writeQuestion (){
+function writeQuestion() {
   //var main defined at the top of page
   main.innerHTML = ""
   var title = document.createElement("h2")
@@ -123,8 +139,8 @@ function writeQuestion (){
     //list the choices that are in the "choices" array for each questions
     var li = document.createElement("li")
     var button = document.createElement("button")
-    button.textContent = (i+1)+": "+ questions[questionNumber].choices[i]
-    button.setAttribute("onclick", "checker("+i+")")
+    button.textContent = (i + 1) + ": " + questions[questionNumber].choices[i]
+    button.setAttribute("onclick", "checker(" + i + ")")
     li.appendChild(button)
     ul.appendChild(li)
   }
@@ -133,7 +149,7 @@ function writeQuestion (){
 }
 
 //start the quiz by clicking the button
-startQuiz.addEventListener("click", function() {
+startQuiz.addEventListener("click", function () {
   //interval counts down by one second
   timerInterval = setInterval(TimerCountdown, 1000);
   //call on the function writeQuestion to display the questions

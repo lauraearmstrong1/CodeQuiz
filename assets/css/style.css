@@ -12,7 +12,7 @@ h2 {
   margin-bottom: 0.45em;
 }
 
-button {
+button, .btn {
   background-color: rgb(70, 20, 70);
   border-radius: 2px;
   color: #fff;
