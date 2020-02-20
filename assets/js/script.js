@@ -1,10 +1,3 @@
-//click start button
-//timer starts and i'm presented with a question
-//answer and then another question
-//when i'm incorrect, time is subtracted from the clock
-//when all questions are answered or the timer reaches 0 then the game is over
-//and my time and initials are scored
-
 var startQuiz = document.querySelector("#startQuiz")
 var main = document.getElementById("main")
 var questionNumber = 0
@@ -47,25 +40,9 @@ var timerDom = document.getElementById("timer");
 var timerInterval;
 
 
-//CODE BELOW MESSES UP THE QUIZ
-
-function renderLastRegistered() {
-  var times = localStorage.getItem("timerDom");
-  times.value = timerDom;
-  localStorage.getItem("Score", timer);
-  
-  document.body.appendChild("times", timerDom);
-  document.body.appendChild("initials", initials);
-}
-
-//function that saves the name to the local storage
-
-
-//WORKS WITHOUT ABOVE CODE
+//submitting initials 
 function submit(){
-
   var initials = document.getElementById("initials").value
-
     event.preventDefault();
     var local = localStorage.getItem("initials");
     local=  JSON.parse(local)
@@ -74,26 +51,18 @@ function submit(){
     }
     local.push({initials: initials, score: timer})
     localStorage.setItem("initials", JSON.stringify( local))
-     window.location.href="highscore.html" //go to highscores page
-    // initials.textContent = "High Score: " + initials;
-    // localStorage.setItem("initials", initials);
-    // renderLastRegistered(); //calling the last score function
-
-
+    window.location.href="highscore.html" //go to highscores page
 }
+//getting initials
 function getIntials() {
-
-  var intialsPage = '<h2>Highest Scores:</h2> <div class="form-group"><label for="exampleFormControlTextarea1" >Enter Initials:</label><textarea class="form-control" id="initials" rows="1"></textarea><button id="submit" onClick ="submit()">Submit</button></div>'
-
+  var intialsPage = '<h2>Highest Scores:</h2> <div class="form-group"><label for="exampleFormControlTextarea1">Enter Initials:</label><textarea class="form-control" id="initials" rows="1"></textarea><button id="submit" onClick ="submit()">Submit</button></div>'
   main.innerHTML = intialsPage
 }
 
 //function of what happens at the end of the game
 function endGame() {
   clearInterval(timerInterval); //interval stops
-
   getIntials()
-  
 }
 
 //function that keeps track of the time
@@ -104,7 +73,6 @@ function TimerCountdown() {
     endGame()
   }
 }
-
 
 //function that checks which number question the user is on
 function checker(number) {

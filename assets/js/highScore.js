@@ -23,8 +23,7 @@ function render() {
         highScore.appendChild(newUL)
     }
     else{
-
-        highScore.textContent = "No high scores!! "
+        highScore.textContent = "No high scores!!"
     }
 }
 render()
